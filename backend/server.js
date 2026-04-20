@@ -71,7 +71,8 @@ setInterval(() => {
   io.emit('zone_update', currentZones);
   
   // Call Python AI Microservice
-  fetch('http://127.0.0.1:5000/analyze', {
+  const AI_URL = process.env.AI_SERVICE_URL || 'http://127.0.0.1:5000';
+  fetch(`${AI_URL}/analyze`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ zones: currentZones })
